@@ -1,7 +1,7 @@
 {
     "name": "Buku Kas Iuran",
-    "short_name": "Buku Kas",
-    "description": "Aplikasi Pengelolaan Iuran dan Kas Kelompok Tani",
+    "short_name": "Buku Kas Kelompok",
+    "description": "Aplikasi Pengelolaan Iuran dan Kas Kelompok Tani Hamparan 14 & 15",
     "start_url": "/index.html",
     "display": "standalone",
     "background_color": "#1e293b",
