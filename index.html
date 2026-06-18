@@ -6,9 +6,9 @@
   
     <title>Iuran Kelompok Tani</title> 
 
-    <!-- PWA Requirements (Sekarang sudah di dalam tag Head) -->
+    <!-- PWA Requirements -->
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#1e293b">
+    <meta name="theme-color" content="#111827">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Buku Kas">
@@ -16,30 +16,160 @@
     <link rel="icon" type="image/svg+xml" href="icon.svg">
 
     <style>
+        :root {
+            --bg-color: #0f172a; /* Menyelaraskan dengan background Apps Script */
+            --accent-color: #10b981;
+        }
+
         body, html {
             margin: 0;
             padding: 0;
-            overflow: hidden; /* Biar ga ada scrollbar */
-            background-color: #0d1117; /* Warna background gelap biar pas loading ga silau */
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
+            overflow: hidden;
+            background-color: var(--bg-color);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            overscroll-behavior: none; /* Mencegah pull-to-refresh bawaan browser */
         }
+
+        /* Container utama iframe agar pas dengan layar penuh */
+        .app-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
         iframe {
             border: none;
-            width: 100vw;
-            height: 100dvh; /* Diubah ke dvh agar akurat untuk HP Android (Vivo/Samsung) */
+            width: 100%;
+            height: 100%;
             display: block;
+            background-color: var(--bg-color);
+            opacity: 0; /* Mulai dengan transparan agar tidak kedap-kedip saat loading */
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        iframe.loaded {
+            opacity: 1;
+        }
+
+        /* Splash Loader Screen Profesional */
+        .loader-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+        }
+
+        .loader-screen.fade-out {
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(1.05);
+        }
+
+        /* Animasi berdenyut untuk ikon loading */
+        .loader-logo {
+            width: 96px;
+            height: 96px;
+            margin-bottom: 24px;
+            animation: pulse 2s infinite ease-in-out;
+            border-radius: 24px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+        }
+
+        .loader-title {
+            color: #f8fafc;
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: 0.025em;
+            margin-bottom: 8px;
+        }
+
+        .loader-subtitle {
+            color: #94a3b8;
+            font-size: 0.875rem;
+            margin-bottom: 24px;
+        }
+
+        /* Spinner Loading Sederhana */
+        .spinner {
+            width: 28px;
+            height: 28px;
+            border: 3px stroke var(--accent-color);
+            border: 3px solid rgba(16, 185, 129, 0.2);
+            border-top-color: var(--accent-color);
+            border-radius: 50%;
+            animation: spin 0.8s infinite linear;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                filter: brightness(1);
+            }
+            50% {
+                transform: scale(1.06);
+                filter: brightness(1.15);
+            }
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
 
-    <iframe src="https://script.google.com/macros/s/AKfycbzQ_ETD6EAn8amhIEl2EF5gCh-DJAsy8ShlGyxdb7MTkIcCaRfyUFLl6eNrbEy_O1GR/exec"></iframe>
+    <div class="app-container">
+        <!-- Layar Memuat Cepat (Splash Loader) -->
+        <div id="loader" class="loader-screen">
+            <img src="icon.svg" class="loader-logo" alt="Logo">
+            <div class="loader-title">Buku Kas Iuran</div>
+            <div class="loader-subtitle">Kelompok Tani</div>
+            <div class="spinner"></div>
+        </div>
+
+        <!-- Iframe Aplikasi Google Apps Script -->
+        <iframe id="app-iframe" src="https://script.google.com/macros/s/AKfycbzQ_ETD6EAn8amhIEl2EF5gCh-DJAsy8ShlGyxdb7MTkIcCaRfyUFLl6eNrbEy_O1GR/exec"></iframe>
+    </div>
     
     <script>
+        const iframe = document.getElementById('app-iframe');
+        const loader = document.getElementById('loader');
+
+        // Sembunyikan loader secara instan dan munculkan iframe begitu konten iframe selesai dirender
+        iframe.onload = function() {
+            // Memberi jeda mikro agar rendering browser di dalam iframe stabil dahulu
+            setTimeout(() => {
+                iframe.classList.add('loaded');
+                loader.classList.add('fade-out');
+            }, 300);
+        };
+
+        // Proteksi jika iframe gagal memicu onload (misal masalah jaringan), batasi loading maks 12 detik
+        setTimeout(() => {
+            if (!iframe.classList.contains('loaded')) {
+                iframe.classList.add('loaded');
+                loader.classList.add('fade-out');
+            }
+        }, 12000);
+
         // Registrasi Service Worker untuk PWA
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('sw.js').then(registration => {
                     console.log('PWA Ready!');
+                }).catch(err => {
+                    console.log('PWA SW Register Fail: ', err);
                 });
             });
         }
