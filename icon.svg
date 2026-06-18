@@ -1,37 +1,57 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
-  <!-- Background aman untuk Maskable Icon (Menjamin area tengah 80% tidak terpotong) -->
-  <defs>
-    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#111827" />
-      <stop offset="100%" stop-color="#065f46" />
-    </linearGradient>
-    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#fbbf24" />
-      <stop offset="100%" stop-color="#d97706" />
-    </linearGradient>
-    <linearGradient id="leafGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#34d399" />
-      <stop offset="100%" stop-color="#059669" />
-    </linearGradient>
-    <filter id="dropShadow" x="-10%" y="-10%" width="120%" height="120%">
-      <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#000000" flood-opacity="0.4" />
-    </filter>
-  </defs>
+<!-- STREAMING_CHUNK: Menggambar pita pembatas buku berwarna emas... -->
+<!-- Pita pembatas buku (Bookmark Ribbon) menjuntai ke bawah -->
+<path d="M246,260 L246,400 L256,412 L266,400 L266,260 Z" fill="url(#goldGrad)" />
 
-  <!-- Base background (bisa dipotong aman oleh sistem operasi) -->
-  <rect width="512" height="512" rx="112" fill="url(#bgGrad)" />
+<!-- STREAMING_CHUNK: Membentuk cover buku kas luar bermotif hijau hutan & emas... -->
+<!-- Cover Buku (Bagian Luar) -->
+<path d="M125,295 L125,375 C160,355 210,345 256,357 C302,345 352,355 387,375 L387,295 C352,275 302,265 256,277 C210,265 160,275 125,295 Z" fill="#022c22" stroke="url(#goldGrad)" stroke-width="4" stroke-linejoin="round" />
 
-  <!-- Konten Utama di dalam Safe Zone (Pusat) -->
-  <g filter="url(#dropShadow)">
-    <!-- Simbol Koin Emas (Finansial / Iuran) -->
-    <circle cx="256" cy="270" r="110" fill="url(#goldGrad)" />
-    <circle cx="256" cy="270" r="85" fill="none" stroke="#fef08a" stroke-width="6" stroke-dasharray="16 8" />
-    
-    <!-- Tunas Daun Hijau (Pertanian / Kelompok Tani) yang tumbuh dari koin -->
-    <path d="M256,120 C280,170 310,210 310,260 C310,300 285,320 256,320 C227,320 202,300 202,260 C202,210 232,170 256,120 Z" fill="url(#leafGrad)" />
-    <!-- Detail urat daun tengah -->
-    <path d="M256,135 L256,310" stroke="#a7f3d0" stroke-width="5" stroke-linecap="round" />
-    <path d="M256,200 Q280,185 290,170" fill="none" stroke="#a7f3d0" stroke-width="4" stroke-linecap="round" />
-    <path d="M256,240 Q230,225 220,210" fill="none" stroke="#a7f3d0" stroke-width="4" stroke-linecap="round" />
-  </g>
-</svg>
+<!-- STREAMING_CHUNK: Merender halaman buku kas bergaris tipis... -->
+<!-- Halaman Kertas Buku Sebelah Kiri -->
+<path d="M135,285 L135,360 C170,340 215,330 256,342 L256,267 C215,255 170,265 135,285 Z" fill="url(#pageGrad)" />
+<!-- Garis Baris Lembar Kiri -->
+<path d="M150,298 Q190,288 240,295" stroke="#cbd5e1" stroke-width="3" stroke-linecap="round" />
+<path d="M150,314 Q190,304 240,311" stroke="#cbd5e1" stroke-width="3" stroke-linecap="round" />
+<path d="M150,330 Q190,320 240,327" stroke="#cbd5e1" stroke-width="3" stroke-linecap="round" />
+
+<!-- Halaman Kertas Buku Sebelah Kanan -->
+<path d="M377,285 L377,360 C342,340 297,330 256,342 L256,267 C297,255 342,265 377,285 Z" fill="url(#pageGrad)" />
+<!-- Garis Baris Lembar Kanan -->
+<path d="M272,295 Q322,288 362,298" stroke="#cbd5e1" stroke-width="3" stroke-linecap="round" />
+<path d="M272,311 Q322,304 362,314" stroke="#cbd5e1" stroke-width="3" stroke-linecap="round" />
+<path d="M272,327 Q322,320 362,330" stroke="#cbd5e1" stroke-width="3" stroke-linecap="round" />
+
+<!-- STREAMING_CHUNK: Menumbuhkan tanaman/tunas tani hijau dari tengah lipatan buku... -->
+<!-- Tunas Daun Pertanian tumbuh dari tengah buku -->
+<!-- Batang Utama -->
+<path d="M256,275 C256,220 256,180 256,150" stroke="url(#leafGrad)" stroke-width="12" stroke-linecap="round" fill="none" />
+
+<!-- Daun Kiri -->
+<path d="M256,170 C200,160 170,210 185,250 C215,250 245,210 256,170 Z" fill="url(#leafGrad)" />
+<!-- Urat Daun Kiri -->
+<path d="M240,195 Q215,205 200,225" stroke="#a7f3d0" stroke-width="3" stroke-linecap="round" fill="none" />
+
+<!-- Daun Kanan -->
+<path d="M256,170 C312,160 342,210 327,250 C297,250 267,210 256,170 Z" fill="url(#leafGrad)" />
+<!-- Urat Daun Kanan -->
+<path d="M272,195 Q297,205 312,225" stroke="#a7f3d0" stroke-width="3" stroke-linecap="round" fill="none" />
+
+<!-- Daun Kuncup Tengah (Menghadap Ke atas) -->
+<path d="M256,150 C270,120 270,90 256,70 C242,90 242,120 256,150 Z" fill="url(#leafGrad)" />
+
+<!-- STREAMING_CHUNK: Menghias ikon dengan koin iuran emas dan kilauan bintang kemakmuran... -->
+<!-- Koin Emas Samping Kiri (Iuran) -->
+<circle cx="140" cy="190" r="15" fill="url(#goldGrad)" stroke="#fef08a" stroke-width="2.5" />
+<circle cx="140" cy="190" r="9" fill="none" stroke="#fef08a" stroke-width="2" stroke-dasharray="4 2" />
+
+<!-- Koin Emas Samping Kanan (Kas) -->
+<circle cx="372" cy="190" r="15" fill="url(#goldGrad)" stroke="#fef08a" stroke-width="2.5" />
+<circle cx="372" cy="190" r="9" fill="none" stroke="#fef08a" stroke-width="2" stroke-dasharray="4 2" />
+
+<!-- Efek Kilau Kemakmuran (Sparkles) -->
+<!-- Kilau Atas -->
+<path d="M256,42 Q256,52 266,52 Q256,52 256,62 Q256,52 246,52 Q256,52 256,42 Z" fill="#fbbf24" />
+<!-- Kilau Kiri -->
+<path d="M190,105 Q190,110 195,110 Q190,110 190,115 Q190,110 185,110 Q190,110 190,105 Z" fill="#fbbf24" />
+<!-- Kilau Kanan -->
+<path d="M322,105 Q322,110 327,110 Q322,110 322,115 Q322,110 317,110 Q322,110 322,105 Z" fill="#fbbf24" />
