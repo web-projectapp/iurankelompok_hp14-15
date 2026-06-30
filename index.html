@@ -1,96 +1,102 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Buku Kas Iuran</title>
-  
-  <!-- SEO & PWA Meta Tags -->
-  <meta name="description" content="Aplikasi Pengelolaan Iuran dan Kas Kelompok Tani">
-  <meta name="theme-color" content="#111827">
-  
-  <!-- Apple Mobile Web App Tags -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Iuran Kelompok">
-  <link rel="apple-touch-icon" href="icon.svg">
-  
-  <!-- Link Manifest & Favicon -->
-  <link rel="manifest" href="manifest.json">
-  <link rel="icon" type="image/svg+xml" href="icon.svg">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Buku Kas Iuran</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-    html, body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      background-color: #0f172a;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    }
-    
-    /* Wrapper untuk responsivitas maksimal di berbagai resolusi layar */
-    .app-container {
-      width: 100%;
-      height: 100%;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-    }
+    <!-- SEO & PWA Meta Tags -->
+    <meta name="description" content="Aplikasi Pengelolaan Iuran dan Kas Kelompok Tani">
+    <meta name="theme-color" content="#111827">
 
-    /* Iframe menempati seluruh layar dengan scroll internal aman */
-    iframe {
-      border: none;
-      width: 100%;
-      height: 100%;
-      flex: 1;
-      display: block;
-      background-color: #f8fafc; /* Menyamakan background app utama */
-    }
+    <!-- Apple Mobile Web App Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Iuran Kelompok">
+    <link rel="apple-touch-icon" href="icon.svg">
 
-    /* Support area notch / safe area insets untuk HP modern */
-    @supports (padding-top: env(safe-area-inset-top)) {
-      .app-container {
-        padding-top: env(safe-area-inset-top);
-        background-color: #111827; /* Status bar matching theme */
-      }
-    }
-  </style>
+    <!-- Link Manifest & Favicon -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/svg+xml" href="icon.svg">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #0f172a;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* Wrapper untuk responsivitas maksimal di berbagai resolusi layar */
+        .app-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Iframe menempati seluruh layar dengan scroll internal aman */
+        iframe {
+            border: none;
+            width: 100%;
+            height: 100%;
+            flex: 1;
+            display: block;
+            background-color: #f8fafc;
+            /* Menyamakan background app utama */
+        }
+
+        /* Support area notch / safe area insets untuk HP modern */
+        @supports (padding-top: env(safe-area-inset-top)) {
+            .app-container {
+                padding-top: env(safe-area-inset-top);
+                background-color: #111827;
+                /* Status bar matching theme */
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-  <div class="app-container">
-    <!-- Ganti URL di src ini dengan tautan Google Apps Script Web App Anda (doGet) -->
-    <iframe 
-      id="app-iframe"
-      src="https://script.google.com/macros/s/AKfycbzQ_ETD6EAn8amhIEl2EF5gCh-DJAsy8ShlGyxdb7MTkIcCaRfyUFLl6eNrbEy_O1GR/exec"
-      title="Buku Kas Iuran"
-      allow="geolocation; microphone; camera">
-    </iframe>
-  </div>
+    <div class="app-container">
+        <!-- Ganti URL di src ini dengan tautan Google Apps Script Web App Anda (doGet) -->
+        <iframe id="app-iframe"
+            src="https://script.google.com/macros/s/AKfycbzQ_ETD6EAn8amhIEl2EF5gCh-DJAsy8ShlGyxdb7MTkIcCaRfyUFLl6eNrbEy_O1GR/exec"
+            title="Buku Kas Iuran" allow="geolocation; microphone; camera">
+        </iframe>
+    </div>
 
-  <script>
-    // Registrasi Service Worker untuk PWA
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js')
-          .then(reg => console.log('Service Worker terdaftar:', reg.scope))
-          .catch(err => console.error('Pendaftaran Service Worker gagal:', err));
-      });
-    }
+    <script>
+        // Registrasi Service Worker untuk PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('Service Worker terdaftar:', reg.scope))
+                    .catch(err => console.error('Pendaftaran Service Worker gagal:', err));
+            });
+        }
 
-    // Penyesuaian responsif dan deteksi query parameter jika ingin memuat URL dinamis
-    window.addEventListener('DOMContentLoaded', () => {
-      const urlParams = new URLSearchParams(window.location.search);
-      const customUrl = urlParams.get('gasUrl');
-      if (customUrl && customUrl.startsWith('https://script.google.com/')) {
-        document.getElementById('app-iframe').src = customUrl;
-      }
-    });
-  </script>
+        // Penyesuaian responsif dan deteksi query parameter jika ingin memuat URL dinamis
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const customUrl = urlParams.get('gasUrl');
+            if (customUrl && customUrl.startsWith('https://script.google.com/')) {
+                document.getElementById('app-iframe').src = customUrl;
+            }
+        });
+    </script>
 </body>
+
 </html>
