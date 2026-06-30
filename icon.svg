@@ -2,19 +2,15 @@
   <!-- Background aman untuk Maskable Icon (Menjamin area tengah 80% tidak terpotong) -->
   <defs>
     <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#111827" />
-      <stop offset="100%" stop-color="#065f46" />
+      <stop offset="0%" stop-color="#1e1b4b" />
+      <stop offset="100%" stop-color="#3b0764" />
     </linearGradient>
     <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#fbbf24" />
       <stop offset="100%" stop-color="#d97706" />
     </linearGradient>
-    <linearGradient id="leafGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#34d399" />
-      <stop offset="100%" stop-color="#059669" />
-    </linearGradient>
     <filter id="dropShadow" x="-10%" y="-10%" width="120%" height="120%">
-      <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#000000" flood-opacity="0.4" />
+      <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.5" />
     </filter>
   </defs>
 
@@ -22,16 +18,7 @@
   <rect width="512" height="512" rx="112" fill="url(#bgGrad)" />
 
   <!-- Konten Utama di dalam Safe Zone (Pusat) -->
-  <g filter="url(#dropShadow)">
-    <!-- Simbol Koin Emas (Finansial / Iuran) -->
-    <circle cx="256" cy="270" r="110" fill="url(#goldGrad)" />
-    <circle cx="256" cy="270" r="85" fill="none" stroke="#fef08a" stroke-width="6" stroke-dasharray="16 8" />
-    
-    <!-- Tunas Daun Hijau (Pertanian / Kelompok Tani) yang tumbuh dari koin -->
-    <path d="M256,120 C280,170 310,210 310,260 C310,300 285,320 256,320 C227,320 202,300 202,260 C202,210 232,170 256,120 Z" fill="url(#leafGrad)" />
-    <!-- Detail urat daun tengah -->
-    <path d="M256,135 L256,310" stroke="#a7f3d0" stroke-width="5" stroke-linecap="round" />
-    <path d="M256,200 Q280,185 290,170" fill="none" stroke="#a7f3d0" stroke-width="4" stroke-linecap="round" />
-    <path d="M256,240 Q230,225 220,210" fill="none" stroke="#a7f3d0" stroke-width="4" stroke-linecap="round" />
+  <g filter="url(#dropShadow)" transform="translate(64, 85.3) scale(0.6667)">
+    <path d="M249.6 471.5c10.8 3.8 22.4-4.1 22.4-15.5V78.6c0-4.2-1.6-8.4-5-11C247.4 52 202.4 32 144 32C93.5 32 46.3 45.3 18.1 56.1C6.8 60.5 0 71.7 0 83.8V454.3c0 11.9 12.8 20.2 24.1 16.5C55.6 460.1 105.5 448 144 448c33.9 0 79 10.3 105.6 23.5zm76.8 0C353 458.3 398.1 448 432 448c38.5 0 88.4 12.1 119.9 22.8c11.3 3.8 24.1-4.6 24.1-16.5V83.8c0-12.1-6.8-23.3-18.1-27.6C529.7 45.3 482.5 32 432 32c-58.4 0-103.4 20-123 35.6c-3.3 2.6-5 6.8-5 11V456c0 11.4 11.7 19.3 22.4 15.5z" fill="url(#goldGrad)" />
   </g>
 </svg>
