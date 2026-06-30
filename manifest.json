@@ -4,14 +4,20 @@
   "description": "Aplikasi Pengelolaan Iuran dan Kas Kelompok Tani",
   "start_url": "index.html",
   "display": "standalone",
-  "background_color": "#0f172a", // Mengikuti background gelap premium
-  "theme_color": "#111827",      // Mengikuti bar status gelap PWA
+  "background_color": "#0f172a",
+  "theme_color": "#111827",
   "orientation": "portrait",
   "icons": [
     {
       "src": "icon.svg",
-      "sizes": "192x192 512x512",
+      "sizes": "512x512",
       "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
       "purpose": "any maskable"
     }
   ]
