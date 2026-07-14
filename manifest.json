@@ -4,8 +4,8 @@
   "description": "Aplikasi Pengelolaan Iuran dan Kas Kelompok Tani",
   "start_url": "index.html",
   "display": "standalone",
-  "background_color": "#0f172a",
-  "theme_color": "#111827",
+  "background_color": "#1e1b4b",
+  "theme_color": "#1e1b4b",
   "orientation": "portrait",
   "icons": [
     {
