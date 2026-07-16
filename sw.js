@@ -1,4 +1,4 @@
-const CACHE_NAME = 'buku-kas-pwa-v1.2'; // incremented cache version
+const CACHE_NAME = 'buku-kas-pwa-v1.3'; // incremented cache version to v1.3
 
 // Menyimpan shell aplikasi di dalam cache lokal browser agar dapat langsung dimuat dalam <1 detik
 const ASSETS_TO_CACHE = [
