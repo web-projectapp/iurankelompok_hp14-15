@@ -53,8 +53,13 @@
             height: 100%;
             flex: 1;
             display: block;
-            background-color: #f8fafc;
-            /* Menyamakan background app utama */
+            background-color: transparent;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        iframe.loaded {
+            opacity: 1;
         }
 
         /* Support area notch / safe area insets untuk HP modern */
@@ -65,10 +70,214 @@
                 /* Status bar matching theme */
             }
         }
+
+        /* Premium PWA Splash Screen Styles */
+        #pwa-splash {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 99999;
+            background: linear-gradient(to bottom right, #1e1b4b, #3b0764);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.7s;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .splash-logo-wrapper {
+            position: relative;
+            width: 96px;
+            height: 96px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+
+        @media (min-width: 768px) {
+            .splash-logo-wrapper {
+                width: 112px;
+                height: 112px;
+            }
+        }
+
+        /* Outer glowing spinner rings */
+        .splash-ring-bg {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            border: 4px solid rgba(99, 102, 241, 0.2);
+        }
+
+        .splash-ring-spinner {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            border: 4px solid transparent;
+            border-top-color: #fbbf24;
+            animation: splashSpin 1.5s linear infinite;
+        }
+
+        .splash-ring-ping {
+            position: absolute;
+            top: -6px;
+            left: -6px;
+            right: -6px;
+            bottom: -6px;
+            border-radius: 50%;
+            border: 2px solid rgba(129, 140, 248, 0.1);
+            animation: splashPing 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+
+        /* Inner glowing gradient blur */
+        .splash-logo-blur {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            right: 8px;
+            bottom: 8px;
+            background: linear-gradient(to bottom right, #fbbf24, #6366f1);
+            border-radius: 1.8rem;
+            filter: blur(8px);
+            opacity: 0.4;
+            animation: splashPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        /* Core icon container */
+        .splash-logo-core {
+            position: relative;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            width: 64px;
+            height: 64px;
+            border-radius: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        @media (min-width: 768px) {
+            .splash-logo-core {
+                width: 80px;
+                height: 80px;
+            }
+        }
+
+        .splash-icon {
+            color: #4f46e5;
+            width: 24px;
+            height: 24px;
+            animation: splashPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @media (min-width: 768px) {
+            .splash-icon {
+                width: 30px;
+                height: 30px;
+            }
+        }
+
+        .splash-title {
+            color: #ffffff;
+            font-size: 1.125rem;
+            font-weight: 900;
+            letter-spacing: -0.025em;
+            margin: 0 0 8px 0;
+            text-align: center;
+        }
+
+        @media (min-width: 768px) {
+            .splash-title {
+                font-size: 1.25rem;
+            }
+        }
+
+        .splash-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background-color: rgba(15, 23, 42, 0.4);
+            padding: 6px 14px;
+            border-radius: 9999px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .splash-badge-spinner {
+            width: 10px;
+            height: 10px;
+            border: 2px solid transparent;
+            border-top-color: #fbbf24;
+            border-left-color: #fbbf24;
+            border-radius: 50%;
+            animation: splashSpin 1s linear infinite;
+        }
+
+        .splash-badge-text {
+            color: #fde68a;
+            font-size: 8.5px;
+            font-weight: 900;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin: 0;
+        }
+
+        @keyframes splashSpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes splashPing {
+            75%, 100% {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+
+        @keyframes splashPulse {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: .8;
+                transform: scale(0.95);
+            }
+        }
     </style>
 </head>
 
 <body>
+
+    <!-- Premium Loading Splash Screen (PWA Wrapper Layer) -->
+    <div id="pwa-splash">
+        <div class="splash-logo-wrapper">
+            <!-- Outer glowing spinner rings -->
+            <div class="splash-ring-bg"></div>
+            <div class="splash-ring-spinner"></div>
+            <div class="splash-ring-ping"></div>
+            <!-- Inner glowing gradient blur -->
+            <div class="splash-logo-blur"></div>
+            <!-- Core icon container -->
+            <div class="splash-logo-core">
+                <svg class="splash-icon" viewBox="0 0 512 512" fill="currentColor">
+                    <path d="M64 32C28.7 32 0 60.7 0 96V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm288 192a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/>
+                </svg>
+            </div>
+        </div>
+        <h2 class="splash-title">Buku Kas Digital</h2>
+        <div class="splash-badge">
+            <div class="splash-badge-spinner"></div>
+            <p class="splash-badge-text">Menyiapkan Sistem...</p>
+        </div>
+    </div>
 
     <div class="app-container">
         <!-- Ganti URL di src ini dengan tautan Google Apps Script Web App Anda (doGet) -->
@@ -92,9 +301,38 @@
         window.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
             const customUrl = urlParams.get('gasUrl');
+            const iframe = document.getElementById('app-iframe');
+            
             if (customUrl && customUrl.startsWith('https://script.google.com/')) {
-                document.getElementById('app-iframe').src = customUrl;
+                iframe.src = customUrl;
             }
+
+            // Inisialisasi transisi Splash Screen
+            const splash = document.getElementById('pwa-splash');
+            let splashDismissed = false;
+
+            const dismissSplash = () => {
+                if (splashDismissed) return;
+                splashDismissed = true;
+                
+                // Tampilkan iframe (fade in)
+                iframe.classList.add('loaded');
+                
+                // Sembunyikan splash screen (fade out)
+                if (splash) {
+                    splash.style.opacity = '0';
+                    splash.style.visibility = 'hidden';
+                    setTimeout(() => {
+                        splash.remove();
+                    }, 700);
+                }
+            };
+
+            // Deteksi ketika iframe selesai memuat halaman awal
+            iframe.addEventListener('load', dismissSplash);
+
+            // Timeout cadangan jika koneksi lambat (maksimal 10 detik agar tidak stuck)
+            setTimeout(dismissSplash, 10000);
         });
     </script>
 </body>
