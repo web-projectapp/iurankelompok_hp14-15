@@ -328,11 +328,15 @@
                 }
             };
 
-            // Deteksi ketika iframe selesai memuat halaman awal
-            iframe.addEventListener('load', dismissSplash);
+            // Deteksi sinyal APP_READY dari Google Apps Script di dalam iframe
+            window.addEventListener('message', (event) => {
+                if (event.data && event.data.type === 'APP_READY') {
+                    dismissSplash();
+                }
+            });
 
-            // Timeout cadangan jika koneksi lambat (maksimal 10 detik agar tidak stuck)
-            setTimeout(dismissSplash, 10000);
+            // Timeout cadangan jika koneksi sangat lambat (maksimal 12 detik agar tidak stuck)
+            setTimeout(dismissSplash, 12000);
         });
     </script>
 </body>
