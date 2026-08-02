@@ -288,7 +288,7 @@
         <!-- Ganti URL di src ini dengan tautan Google Apps Script Web App Anda (doGet) -->
         <iframe id="app-iframe"
             src="https://script.google.com/macros/s/AKfycbzQ_ETD6EAn8amhIEl2EF5gCh-DJAsy8ShlGyxdb7MTkIcCaRfyUFLl6eNrbEy_O1GR/exec"
-            title="Buku Kas Iuran" allow="geolocation; microphone; camera">
+            title="Buku Kas Iuran" allow="geolocation; microphone; camera; fullscreen" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true">
         </iframe>
     </div>
 
@@ -333,10 +333,25 @@
                 }
             };
 
-            // Deteksi sinyal APP_READY dari Google Apps Script di dalam iframe
+            // Deteksi sinyal APP_READY & TOGGLE_FULLSCREEN dari Google Apps Script di dalam iframe
             window.addEventListener('message', (event) => {
                 if (event.data && event.data.type === 'APP_READY') {
                     dismissSplash();
+                }
+                if (event.data && event.data.type === 'TOGGLE_FULLSCREEN') {
+                    const isFS = !!(document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement);
+                    if (!isFS) {
+                        const docEl = document.documentElement;
+                        if (docEl.requestFullscreen) docEl.requestFullscreen().catch(() => {});
+                        else if (docEl.webkitRequestFullscreen) docEl.webkitRequestFullscreen();
+                        else if (docEl.mozRequestFullScreen) docEl.mozRequestFullScreen();
+                        else if (docEl.msRequestFullscreen) docEl.msRequestFullscreen();
+                    } else {
+                        if (document.exitFullscreen) document.exitFullscreen().catch(() => {});
+                        else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+                        else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
+                        else if (document.msExitFullscreen) document.msExitFullscreen();
+                    }
                 }
             });
 
